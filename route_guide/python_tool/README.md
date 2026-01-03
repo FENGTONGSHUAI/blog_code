@@ -8,6 +8,10 @@
 sudo yum groupinstall "Development Tools" -y
 sudo yum install openssl-devel bzip2-devel libffi-devel zlib-devel readline-devel sqlite-devel wget -y
 
+# 上面是Centos中的指令, 下面给出ubuntu下的指令
+# sudo apt update 
+# sudo apt install build-essential libssl-dev libbz2-dev libffi-dev zlib1g-dev libreadline-dev libsqlite3-dev wget -y
+
 # 2. 下载Python源码
 wget https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tar.xz
 tar -xJf Python-3.11.9.tar.xz
