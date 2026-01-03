@@ -48,6 +48,8 @@ sh generate_python_pb.sh
 # ubuntu 24.04运行流程
 后面换上ubuntu24.04, 默认python版本3.12.2, 使用虚拟环境运行, 流程如下:
 ```shell
+# 确保可以创建虚拟环境
+sudo apt install python3.12-venv
 # 创建虚拟环境
 python3 -m venv python_tool
 # 激活虚拟环境
