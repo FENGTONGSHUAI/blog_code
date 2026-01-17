@@ -79,6 +79,7 @@ class ServerImpl final {
     CallData(Greeter::AsyncService* service, ServerCompletionQueue* cq)
         : service_(service), cq_(cq), responder_(&ctx_), status_(CREATE) {
       // 立即调用服务逻辑。
+      std::cout << "CallData init, CallData = " << this << std::endl;
       Proceed();
     }
 
@@ -92,6 +93,7 @@ class ServerImpl final {
         // 这里是此CallData实例的内存地址。
         service_->RequestSayHello(&ctx_, &request_, &responder_, cq_, cq_,
                                   this);
+        std::cout << "CallData entering PROCESS state, CallData =" << this << std::endl;
       } else if (status_ == PROCESS) {
         // 在处理当前CallData的请求时，生成一个新的CallData实例来服务新客户端。
         // 该实例将在其FINISH状态时自行释放内存。
@@ -105,10 +107,12 @@ class ServerImpl final {
         // 使用此实例的内存地址作为事件的唯一标识标签。
         status_ = FINISH;
         responder_.Finish(reply_, Status::OK, this);
+        std::cout << "CallData entering FINISH state, CallData =" << this << std::endl;
       } else {
         CHECK_EQ(status_, FINISH);
         // 进入FINISH状态后，自行释放内存（CallData）。
         delete this;
+        std::cout << "CallData delete, CallData =" << this << std::endl;
       }
     }
 
